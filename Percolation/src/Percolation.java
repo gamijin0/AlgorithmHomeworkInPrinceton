@@ -8,7 +8,11 @@ import java.util.Objects;
 
 
 public class Percolation extends WeightedQuickUnionUF{
+
     private boolean grid[][]; //false is blocked, true is opened
+    private int getIndex(int row,int col){
+        return row*this.grid.length+col+1;
+    }
     public Percolation(int n) throws IllegalArgumentException{
         super(n*n+2);//add a virtual top(0) and bottom(n*n+1) side
         if(n<=0){
@@ -36,6 +40,18 @@ public class Percolation extends WeightedQuickUnionUF{
             throw new IndexOutOfBoundsException();
         }
         if(!this.grid[row][col]){
+            if(row!=0 && this.grid[row-1][col]){
+                this.union(getIndex(row,col),getIndex(row-1,col));
+            }
+            if(col!=0 && this.grid[row][col-1]){
+                this.union(getIndex(row,col),getIndex(row,col-1));
+            }
+            if(row!=this.grid.length-1 && this.grid[row+1][col]){
+                this.union(getIndex(row,col),getIndex(row+1,col));
+            }
+            if(col!=this.grid.length-1 && this.grid[row][col+1]){
+                this.union(getIndex(row,col),getIndex(row,col+1));
+            }
             this.grid[row][col]=true;
         }
     }    // open site (row, col) if it is not open already

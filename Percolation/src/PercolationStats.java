@@ -42,6 +42,6 @@ public class PercolationStats {
     }                  // high endpoint of 95% confidence interval
 
     public static void main(String[] args){
-
+        PercolationStats one =new PercolationStats(args[1],args[2]);
     }        // test client (described below)
 }
