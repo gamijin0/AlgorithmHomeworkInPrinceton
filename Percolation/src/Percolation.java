@@ -32,24 +32,25 @@ public class Percolation {
     public void open(int row, int col) {
         row = row -1;
         col = col -1;
+
         if( row >= this.grid.length || col >= this.grid.length || row < 0 ||col < 0){
             throw new IndexOutOfBoundsException();
         }
-        if(!this.isOpen(row,col)){
+        if(!this.grid[row][col]){
             if(row>0 ){
-                if(this.isOpen(row-1,col))
+                if(this.grid[row-1][col])
                     this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row-1,col));
             }
             if(col>0 ){
-                if(this.isOpen(row,col-1))
+                if(this.grid[row][col-1])
                     this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row,col-1));
             }
             if(row<this.grid.length-1){
-                if(this.isOpen(row+1,col))
+                if(this.grid[row+1][col])
                     this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row+1,col));
             }
             if(col<this.grid.length-1 ){
-                if(this.isOpen(row,col+1))
+                if(this.grid[row][col+1])
                     this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row,col+1));
             }
             this.grid[row][col]=true;
@@ -69,7 +70,7 @@ public class Percolation {
         if( row >= this.grid.length || col >= this.grid.length || row < 0 ||col < 0){
             throw new IndexOutOfBoundsException();
         }
-        if(this.isOpen(row,col))
+        if(this.isOpen(row+1,col+1))
             return this.weightedQuickUnionUF.connected(0,this.getIndex(row,col));
         else
             return false;

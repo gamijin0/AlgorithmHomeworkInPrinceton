@@ -14,11 +14,11 @@ public class PercolationStats {
             while (!one.percolates()){
                 int row = StdRandom.uniform(n);
                 int col = StdRandom.uniform(n);
-                while (one.isOpen(row,col)){
+                while (one.isOpen(row+1,col+1)){
                     row = StdRandom.uniform(n);
                     col = StdRandom.uniform(n);
                 }
-                one.open(row,col);
+                one.open(row+1,col+1);
                     records += 1;
             }
             this.statisticData[i]=records/(n*n*1.0);
