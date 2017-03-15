@@ -1,13 +1,12 @@
-/**
- * Created by 49738 on 2017/3/15.
- */
 import edu.princeton.cs.algs4.StdRandom;
 import java.lang.Integer;
-import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
     private double[] statisticData;
     public PercolationStats(int n, int trials) {
+        if(n<=0 || trials<=0){
+            throw new IllegalArgumentException();
+        }
         this.statisticData = new double[trials]; //to store the threshold of each trail
         for(int i=0;i<trials;i++){
             Percolation one = new Percolation(n);
@@ -32,7 +31,7 @@ public class PercolationStats {
             sum+=v;
         }
         return sum*1.0/this.statisticData.length;
-    }                          // sample mean of percolation threshold
+    }   // sample mean of percolation threshold
     public double stddev(){
         double mean = this.mean();
         double std2 =0;

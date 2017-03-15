@@ -1,20 +1,14 @@
-/**
- * Created by 49738 on 2017/3/14.
- */
-
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-
-import java.util.Objects;
 
 
 public class Percolation {
-    private WeightedQuickUnionUF UF;
+    private WeightedQuickUnionUF weightedQuickUnionUF;
     private boolean grid[][]; //false is blocked, true is opened
     private int getIndex(int row,int col){
         return row*this.grid.length+col+1;
     }
-    public Percolation(int n) throws IllegalArgumentException{
-        this.UF = new WeightedQuickUnionUF(n*n+2);//add a virtual top(0) and bottom(n*n+1) side
+    public Percolation(int n) {
+        this.weightedQuickUnionUF = new WeightedQuickUnionUF(n*n+2);//add a virtual top(0) and bottom(n*n+1) side
         if(n<=0){
             throw new IllegalArgumentException();
         }
@@ -27,30 +21,30 @@ public class Percolation {
         }
         //union the first floor sides with the virtual top side
         for(int i=1;i<n+1;i++){
-            this.UF.union(0,i);
+            this.weightedQuickUnionUF.union(0,i);
         }
         //union the last floor sides with the virtual bottom side
         for(int i=n*n-n+1;i<n*n+1;i++){
-            this.UF.union(n*n+1,i);
+            this.weightedQuickUnionUF.union(n*n+1,i);
         }
 
     }     // create n-by-n grid, with all sites blocked
     public void open(int row, int col) throws IndexOutOfBoundsException{
-        if( row >= this.grid.length || col >= this.grid.length){
+        if( row >= this.grid.length || col >= this.grid.length || row < 0 ||col < 0){
             throw new IndexOutOfBoundsException();
         }
         if(!this.isOpen(row,col)){
             if(row!=0 && this.grid[row-1][col]){
-                this.UF.union(getIndex(row,col),getIndex(row-1,col));
+                this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row-1,col));
             }
             if(col!=0 && this.grid[row][col-1]){
-                this.UF.union(getIndex(row,col),getIndex(row,col-1));
+                this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row,col-1));
             }
             if(row!=this.grid.length-1 && this.grid[row+1][col]){
-                this.UF.union(getIndex(row,col),getIndex(row+1,col));
+                this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row+1,col));
             }
             if(col!=this.grid.length-1 && this.grid[row][col+1]){
-                this.UF.union(getIndex(row,col),getIndex(row,col+1));
+                this.weightedQuickUnionUF.union(getIndex(row,col),getIndex(row,col+1));
             }
             this.grid[row][col]=true;
         }
@@ -65,7 +59,7 @@ public class Percolation {
         if( row >= this.grid.length || col >= this.grid.length){
             throw new IndexOutOfBoundsException();
         }
-        return this.UF.connected(0,this.getIndex(row,col));
+        return this.weightedQuickUnionUF.connected(0,this.getIndex(row,col));
     }  // is site (row, col) full?
     public int numberOfOpenSites(){
         int num=0;
@@ -79,7 +73,7 @@ public class Percolation {
         return num;
     }       // number of open sites
     public boolean percolates(){
-        return this.UF.connected(0,this.grid.length*this.grid.length+1);
+        return this.weightedQuickUnionUF.connected(0,this.grid.length*this.grid.length+1);
     }              // does the system percolate?
 
     public static void main(String[] args){
