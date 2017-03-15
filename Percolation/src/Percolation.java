@@ -39,7 +39,7 @@ public class Percolation extends WeightedQuickUnionUF{
         if( row >= this.grid.length || col >= this.grid.length){
             throw new IndexOutOfBoundsException();
         }
-        if(!this.grid[row][col]){
+        if(!this.isOpen(row,col)){
             if(row!=0 && this.grid[row-1][col]){
                 this.union(getIndex(row,col),getIndex(row-1,col));
             }
@@ -65,7 +65,7 @@ public class Percolation extends WeightedQuickUnionUF{
         if( row >= this.grid.length || col >= this.grid.length){
             throw new IndexOutOfBoundsException();
         }
-        return this.connected(0,row*this.grid.length+col+1);
+        return this.connected(0,this.getIndex(row,col));
     }  // is site (row, col) full?
     public int numberOfOpenSites(){
         int num=0;
