@@ -65,7 +65,7 @@ public class Deque<Item> implements Iterable<Item> {
 
 
     //functions
-    Deque() {
+    public Deque() {
         this.First = new Node();
         this.First.connectNextTo(this.First);
         this.size = 0;
