@@ -1,4 +1,4 @@
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -110,7 +110,7 @@ public class Deque<Item> implements Iterable<Item> {
     }          // add the item to the end
 
     public Item removeFirst() {
-        if (this.size == 0) {
+        if (this.isEmpty()) {
             throw new NoSuchElementException();
         } else {
             size -= 1;
@@ -121,7 +121,7 @@ public class Deque<Item> implements Iterable<Item> {
     }              // remove and return the item from the front
 
     public Item removeLast() {
-        if (this.size == 0) {
+        if (this.isEmpty()) {
             throw new UnsupportedOperationException();
         } else {
             size -= 1;
@@ -140,8 +140,13 @@ public class Deque<Item> implements Iterable<Item> {
         one.addLast(1);
         one.addLast(2);
         one.addLast(3);
-        for (Integer i : one) {
-            StdOut.println(i);
-        }
+//        for (Integer i : one) {
+//            StdOut.println(i);
+//        }
+        one.removeFirst();
+        one.removeFirst();
+        one.removeFirst();
+        one.removeFirst();
+
     }  // unit testing (optional)
 }

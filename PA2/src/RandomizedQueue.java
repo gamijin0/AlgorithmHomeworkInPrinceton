@@ -32,6 +32,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
+            int rand_index = StdRandom.uniform(it_current,current);
+            if(rand_index != it_current){
+                Item tmp = data[it_current];
+                data[it_current]=data[rand_index];
+                data[rand_index] = tmp;
+            }
             return data[it_current++];
         }
 
@@ -43,7 +49,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     //functions
     public RandomizedQueue() {
-        this.capacity = 100;
+        this.capacity = 3;
         this.current = 0;
         this.data = (Item[]) new Object[capacity];
     }              // construct an empty randomized queue
@@ -73,7 +79,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int rand_index = StdRandom.uniform(current);
         Item item = data[rand_index];
         if (rand_index != current - 1) {
-            data[rand_index] = data[current];
+            data[rand_index] = data[current-1];
         }
         current -= 1;
         if (current < capacity / 4) {
@@ -83,12 +89,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }              // remove and return a random item
 
     public Item sample() {
-        if (current == 0) {
+        if (this.isEmpty()) {
             throw new NoSuchElementException();
         }
-        int rand_index = StdRandom.uniform(current);
-        Item item = data[rand_index];
-        return item;
+        else {
+            int rand_index = StdRandom.uniform(current);
+            return data[rand_index];
+        }
     }                  // return (but do not remove) a random item
 
     private void resize(int new_capacity) {
@@ -108,13 +115,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         RandomizedQueue<Integer> rdqueque = new RandomizedQueue<>();
-        rdqueque.enqueue(100);
-        rdqueque.enqueue(20);
-        rdqueque.enqueue(30);
-        rdqueque.enqueue(40);
-        StdOut.println(rdqueque.dequeue());
-        StdOut.println(rdqueque.dequeue());
-        StdOut.println(rdqueque.dequeue());
-        StdOut.println(rdqueque.dequeue());
+        rdqueque.enqueue(1);
+        rdqueque.enqueue(2);
+        rdqueque.enqueue(3);
+        rdqueque.enqueue(4);
+        rdqueque.enqueue(5);
+        rdqueque.enqueue(6);
+        for (int i:rdqueque) {
+            StdOut.println(i);
+        }
     }  // unit testing (optional)
 }
