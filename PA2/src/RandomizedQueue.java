@@ -20,6 +20,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         RandomizedQueueIterator() {
             this.it_current = 0;
+            StdRandom.shuffle(data);
         }
 
         @Override
@@ -31,12 +32,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         public Item next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
-            }
-            int rand_index = StdRandom.uniform(it_current,current);
-            if(rand_index != it_current){
-                Item tmp = data[it_current];
-                data[it_current]=data[rand_index];
-                data[rand_index] = tmp;
             }
             return data[it_current++];
         }
@@ -121,7 +116,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         rdqueque.enqueue(4);
         rdqueque.enqueue(5);
         rdqueque.enqueue(6);
-        rdqueque.dequeue();
         for (int i:rdqueque) {
             StdOut.println(i);
         }
