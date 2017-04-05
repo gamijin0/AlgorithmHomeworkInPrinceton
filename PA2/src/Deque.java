@@ -122,7 +122,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeLast() {
         if (this.isEmpty()) {
-            throw new UnsupportedOperationException();
+            throw new NoSuchElementException();
         } else {
             size -= 1;
             Node tmp = this.First.prev;
@@ -137,16 +137,16 @@ public class Deque<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         Deque<Integer> one = new Deque<Integer>();
-        one.addLast(1);
-        one.addLast(2);
-        one.addLast(3);
-//        for (Integer i : one) {
-//            StdOut.println(i);
-//        }
-        one.removeFirst();
-        one.removeFirst();
-        one.removeFirst();
-        one.removeFirst();
+//        one.addLast(1);
+//        one.addLast(2);
+//        one.addLast(3);
+////        for (Integer i : one) {
+////            StdOut.println(i);
+////        }
+//        one.removeFirst();
+//        one.removeFirst();
+//        one.removeFirst();
+        one.removeLast();
 
     }  // unit testing (optional)
 }

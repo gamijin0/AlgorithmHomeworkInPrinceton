@@ -121,6 +121,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         rdqueque.enqueue(4);
         rdqueque.enqueue(5);
         rdqueque.enqueue(6);
+        rdqueque.dequeue();
         for (int i:rdqueque) {
             StdOut.println(i);
         }
