@@ -17,10 +17,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     //inner class
     private class RandomizedQueueIterator implements Iterator<Item> {
         private int it_current;
-
+        private Item[] tmp_data;
         RandomizedQueueIterator() {
             this.it_current = 0;
-            StdRandom.shuffle(data);
+            this.tmp_data = (Item[]) new Object[current];
+            System.arraycopy(data,0,tmp_data,0,current);
+            StdRandom.shuffle(tmp_data,0,current-1);
         }
 
         @Override
@@ -33,7 +35,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return data[it_current++];
+            return this.tmp_data[it_current++];
         }
 
         @Override
