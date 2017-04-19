@@ -16,6 +16,14 @@ public class Point implements Comparable<Point> {
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
     public  Comparator<Point> Slope_Order = new SlopeOrder();
+    public static Comparator<Point> Coordinate_Order = new CoordinateOrder();
+
+    private static class CoordinateOrder implements Comparator<Point>{
+        @Override
+        public int compare(Point o1, Point o2) {
+            return o1.compareTo(o2);
+        }
+    }
 
     private class SlopeOrder implements Comparator<Point>{
         @Override
@@ -45,6 +53,7 @@ public class Point implements Comparable<Point> {
      */
     public void draw() {
         /* DO NOT MODIFY */
+        StdDraw.setPenRadius(0.01);
         StdDraw.point(x, y);
     }
 
@@ -75,7 +84,7 @@ public class Point implements Comparable<Point> {
             return Double.NEGATIVE_INFINITY;
         if(that.x==this.x)
             return Double.POSITIVE_INFINITY;
-        return (that.y-this.y)/(that.x-this.x);
+        return (that.y-this.y)*1.0/(that.x-this.x);
     }
 
     /**
@@ -108,6 +117,7 @@ public class Point implements Comparable<Point> {
         return this.Slope_Order;
     }
 
+    public Comparator<Point> coordinateOrder(){ return Point.Coordinate_Order;}
 
     /**
      * Returns a string representation of this point.
