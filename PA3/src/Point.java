@@ -15,15 +15,7 @@ public class Point implements Comparable<Point> {
 
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
-    public  Comparator<Point> Slope_Order = new SlopeOrder();
-    public static Comparator<Point> Coordinate_Order = new CoordinateOrder();
-
-    private static class CoordinateOrder implements Comparator<Point>{
-        @Override
-        public int compare(Point o1, Point o2) {
-            return o1.compareTo(o2);
-        }
-    }
+    private   Comparator<Point> Slope_Order = new SlopeOrder();
 
     private class SlopeOrder implements Comparator<Point>{
         @Override
@@ -80,6 +72,10 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
+        if(that == null)
+        {
+            throw new NullPointerException();
+        }
         if(that.x==this.x && that.y == this.y)
             return Double.NEGATIVE_INFINITY;
         if(that.x==this.x)
@@ -100,6 +96,10 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
+        if(that == null)
+        {
+            throw new NullPointerException();
+        }
         if(that.x==this.x && that.y == this.y)
             return 0;
         if(that.y < this.y || (that.y==this.y && that.x < this.x))
@@ -117,7 +117,6 @@ public class Point implements Comparable<Point> {
         return this.Slope_Order;
     }
 
-    public Comparator<Point> coordinateOrder(){ return Point.Coordinate_Order;}
 
     /**
      * Returns a string representation of this point.

@@ -20,9 +20,12 @@ public class BruteCollinearPoints {
         }
         this.points = points;
     }
-    int numberOfSegments(){
+    public int numberOfSegments(){
         return this.mylineSegments.size();
     }
+
+
+
     public LineSegment[] segments(){
         for (int i= 0;i<points.length-3;i++){
             for (int j= i+1;j<points.length-2;j++){
@@ -33,7 +36,7 @@ public class BruteCollinearPoints {
                         temp.add(points[j]);
                         temp.add(points[k]);
                         temp.add(points[l]);
-                        temp.sort(Point.Coordinate_Order);
+                        temp.sort(Point::compareTo);
 
                         //check if there is some repeated points
                         for(int t =0;t<3;t++){
@@ -41,8 +44,6 @@ public class BruteCollinearPoints {
                                 throw  new IllegalArgumentException();
                             }
                         }
-
-
 
                         if(
                             temp.get(0).slopeTo(temp.get(1))==temp.get(0).slopeTo(temp.get(2)) &&

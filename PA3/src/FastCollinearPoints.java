@@ -24,6 +24,13 @@ public class FastCollinearPoints {
             }
             mypoints.add(p);
         }
+
+        mypoints.sort(Point::compareTo);
+        for (int i = 0; i <mypoints.size()-1; i++) {
+            if(mypoints.get(i).compareTo(mypoints.get(i+1))==0)
+                throw new IllegalArgumentException();
+        }
+
     }// finds all line segments containing 4 or more points
     public int numberOfSegments() // the number of line segments
     {
