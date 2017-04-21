@@ -49,10 +49,10 @@ public class BruteCollinearPoints {
                             temp.get(0).slopeTo(temp.get(2))==temp.get(0).slopeTo(temp.get(3))
                                 ){
 
-                                StdOut.println(temp.get(0).slopeTo(temp.get(1)));
-                                StdOut.println(temp.get(0).slopeTo(temp.get(2)));
-                                StdOut.println(temp.get(0).slopeTo(temp.get(3)));
-                                StdOut.println();
+//                                StdOut.println(temp.get(0).slopeTo(temp.get(1)));
+//                                StdOut.println(temp.get(0).slopeTo(temp.get(2)));
+//                                StdOut.println(temp.get(0).slopeTo(temp.get(3)));
+//                                StdOut.println();
                                 LineSegment a =  new LineSegment(temp.get(0),temp.get(3));
                                 this.mylineSegments.add(a);
                         }

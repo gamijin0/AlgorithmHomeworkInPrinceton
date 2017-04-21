@@ -53,7 +53,7 @@ public class Point implements Comparable<Point> {
      */
     public void draw() {
         /* DO NOT MODIFY */
-        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenRadius(0.02);
         StdDraw.point(x, y);
     }
 

@@ -37,7 +37,7 @@ public class LineSegment {
      * Draws this line segment to standard draw.
      */
     public void draw() {
-        StdDraw.setPenRadius(0.0005);
+        StdDraw.setPenRadius(0.003);
         p.drawTo(q);
     }
 
