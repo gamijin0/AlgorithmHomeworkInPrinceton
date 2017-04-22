@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class FastCollinearPoints {
 
@@ -87,6 +88,23 @@ public class FastCollinearPoints {
 
                 res_linesegment.add(new LineSegment(temp[0], temp[count]));
 
+            }
+        }
+
+        res_linesegment.sort(new Comparator<LineSegment>() {
+            @Override
+            public int compare(LineSegment l1, LineSegment l2) {
+                return l1.toString().compareTo(l2.toString());
+            }
+        });
+
+        int len  = res_linesegment.size();
+        for (int i = 1; i < len; i++) {
+            if(res_linesegment.get(i).toString().equals(res_linesegment.get(i-1).toString()))
+            {
+                res_linesegment.remove(i);
+                --len;
+                --i;
             }
         }
         return res_linesegment.toArray(new LineSegment[res_linesegment.size()]);
