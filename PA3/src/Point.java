@@ -15,7 +15,6 @@ public class Point implements Comparable<Point> {
 
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
-    private   Comparator<Point> Slope_Order = new SlopeOrder();
 
     private class SlopeOrder implements Comparator<Point>{
         @Override
@@ -116,7 +115,7 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        return this.Slope_Order;
+        return new SlopeOrder();
     }
 
 
