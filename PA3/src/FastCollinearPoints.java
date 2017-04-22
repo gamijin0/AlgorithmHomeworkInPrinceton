@@ -39,7 +39,6 @@ public class FastCollinearPoints {
     }
     public LineSegment[] segments() // the line segments
     {
-        ArrayList<LineSegment> res_linesegment = new ArrayList<>();
 
         //按照第i个点的斜率顺序排序
         for (int i = 0; i < this.mypoints.size(); i++) {
@@ -68,7 +67,7 @@ public class FastCollinearPoints {
 
                         Arrays.sort(temp, Point::compareTo);
 
-                        res_linesegment.add(new LineSegment(temp[0], temp[count]));
+                        this.mylineSegments.add(new LineSegment(temp[0], temp[count]));
 
                     }
                     count = 1;
@@ -86,28 +85,28 @@ public class FastCollinearPoints {
 
                 Arrays.sort(temp, Point::compareTo);
 
-                res_linesegment.add(new LineSegment(temp[0], temp[count]));
+                this.mylineSegments.add(new LineSegment(temp[0], temp[count]));
 
             }
         }
 
-        res_linesegment.sort(new Comparator<LineSegment>() {
+        this.mylineSegments.sort(new Comparator<LineSegment>() {
             @Override
             public int compare(LineSegment l1, LineSegment l2) {
                 return l1.toString().compareTo(l2.toString());
             }
         });
 
-        int len  = res_linesegment.size();
+        int len  = this.mylineSegments.size();
         for (int i = 1; i < len; i++) {
-            if(res_linesegment.get(i).toString().equals(res_linesegment.get(i-1).toString()))
+            if(this.mylineSegments.get(i).toString().equals(this.mylineSegments.get(i-1).toString()))
             {
-                res_linesegment.remove(i);
+                this.mylineSegments.remove(i);
                 --len;
                 --i;
             }
         }
-        return res_linesegment.toArray(new LineSegment[res_linesegment.size()]);
+        return this.mylineSegments.toArray(new LineSegment[this.mylineSegments.size()]);
     }
 
 

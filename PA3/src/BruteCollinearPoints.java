@@ -1,5 +1,7 @@
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import edu.princeton.cs.algs4.*;
 
 public class BruteCollinearPoints {
@@ -19,6 +21,13 @@ public class BruteCollinearPoints {
             }
         }
         this.points = points;
+        Arrays.sort(this.points,Point::compareTo);
+        for (int i = 0; i <this.points.length-1; i++) {
+            if(this.points[i].compareTo(this.points[i+1])==0)
+                throw new IllegalArgumentException();
+        }
+
+
     }
     public int numberOfSegments(){
         return this.mylineSegments.size();
